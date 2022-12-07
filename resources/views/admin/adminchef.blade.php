@@ -75,8 +75,7 @@
 @include("admin.adminscript")
 
 
-video nmb 14.
-8minute 18 second
+
 
    
   </body>

@@ -9,6 +9,7 @@ use App\Models\Food;
 use App\Models\Foodchef;
 use App\Models\Cart;
 
+
 class HomeController extends Controller
 {
    public function index()
@@ -79,11 +80,25 @@ class HomeController extends Controller
 
     $count=cart::where('user_id',$id)->count();
 
+    $data2=cart::select('*')->where('user_id', '=' , $id)->get();
+
     $data=cart::where('user_id',$id)->join('food', 'carts.food_id', '=' , 'food.id')->get();
 
 
-    return view('showcart',compact('count','data'));
+    return view('showcart',compact('count','data','data2'));
    }
+
+
+   public function delete($id)
+   {
+    $data=cart::find($id);
+
+    $data->delete();
+
+    return redirect()->back();
+    
+   }
+
 
 
 }
