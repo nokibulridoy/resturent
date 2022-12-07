@@ -13,7 +13,7 @@
 
     <title>Klassy Cafe</title>
 <!--
-    
+
 TemplateMo 558 Klassy Cafe
 
 https://templatemo.com/tm-558-klassy-cafe
@@ -33,9 +33,9 @@ https://templatemo.com/tm-558-klassy-cafe
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
     </head>
-    
+
     <body>
-    
+
     <!-- ***** Preloader Start ***** -->
     <div id="preloader">
         <div class="jumper">
@@ -43,10 +43,10 @@ https://templatemo.com/tm-558-klassy-cafe
             <div></div>
             <div></div>
         </div>
-    </div>  
+    </div>
     <!-- ***** Preloader End ***** -->
-    
-    
+
+
     <!-- ***** Header Area Start ***** -->
     <header class="header-area header-sticky">
         <div class="container">
@@ -62,8 +62,8 @@ https://templatemo.com/tm-558-klassy-cafe
                         <ul class="nav">
                             <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
                             <li class="scroll-to-section"><a href="#about">About</a></li>
-                           	
-                        <!-- 
+
+                        <!--
                             <li class="submenu">
                                 <a href="javascript:;">Drop Down</a>
                                 <ul>
@@ -74,7 +74,7 @@ https://templatemo.com/tm-558-klassy-cafe
                             </li>
                         -->
                             <li class="scroll-to-section"><a href="#menu">Menu</a></li>
-                            <li class="scroll-to-section"><a href="#chefs">Chefs</a></li> 
+                            <li class="scroll-to-section"><a href="#chefs">Chefs</a></li>
                             <li class="submenu">
                                 <a href="javascript:;">Features</a>
                                 <ul>
@@ -110,13 +110,13 @@ https://templatemo.com/tm-558-klassy-cafe
 
 
                             <li>
-                                
+
                                  @if (Route::has('login'))
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                     @auth
                         <li>
                             <x-app-layout>
-   
+
                             </x-app-layout>
                         </li>
                     @else
@@ -129,9 +129,9 @@ https://templatemo.com/tm-558-klassy-cafe
                 </div>
                      @endif
 
-                            </li> 
-                        </ul>        
-                       
+                            </li>
+                        </ul>
+
                         <!-- ***** Menu End ***** -->
                     </nav>
                 </div>
@@ -140,7 +140,7 @@ https://templatemo.com/tm-558-klassy-cafe
     </header>
 
         <div id="top">
-            
+
              <table align="center" bgcolor="#007bff">
 
                 <tr>
@@ -149,99 +149,95 @@ https://templatemo.com/tm-558-klassy-cafe
                     <th style="padding: 30px";>Quantity</th>
                     <th style="padding: 30px";>Action</th>
                 </tr>
-        
-     
-            
-                
+
+                <form action="{{url('orderconfirm')}}" method="POST">
+
+                    @csrf
+
                 @foreach($data as $data)
 
                 <tr align="center" >
+
                     <td>
-                    
+                        <input type="text" name="foodname[]" value="{{$data->title}}" hidden>
                         {{$data->title}}
                     </td>
+
                     <td>
-                       
+                        <input type="text" name="price[]" value="{{$data->price}}" hidden>
                         {{$data->price}}
                     </td>
+
                     <td>
-                       
+                        <input type="text" name="quantity[]" value="{{$data->quantity}}" hidden>
                         {{$data->quantity}}
                     </td>
 
-                    
-                    
+
                 </tr>
 
-                 @endforeach
-
-
-                
+                @endforeach
 
             @foreach($data2 as $data2)
 
-                <tr  style="position: relative; top:-60px; right:-360px;">
+                <tr style="position: relative; top:-35px; right:-360px;">
 
                     <td><a href="{{url('/remove',$data2->id)}}" class="btn btn-danger">Remove</a></td>
 
-                  
                 </tr>
 
-
             @endforeach
-                
+
             </table>
 
-
-
-
             <div align="center" style="padding:10px;">
-                <button class="btn btn-primary" type="btn" id="order">Order Now</button>
-                
+
+                <button type="button" class="btn btn-outline-info" id="order">Order Now</button>
+
             </div>
 
 
-                  <div id="appear" align="center" style="padding: 10px; display: none;">
+
+                <div id="appear" align="center" style="padding: 10px; display: none;">
 
                         <div style="padding: 10px;">
                             <label>Name</label>
-                            <input type="text" name="name" placeholder="Name">   
+                            <input type="text" name="name" placeholder="Name">
                         </div>
 
-                         <div style="padding: 10px;">
+                        <div style="padding: 10px;">
                             <label>Phone</label>
-                            <input type="number" name="phone" placeholder="Phone Number">   
+                            <input type="number" name="phone" placeholder="Phone Number">
                         </div>
 
-                         <div style="padding: 10px;">
+                        <div style="padding: 10px;">
                             <label>Address</label>
-                            <input type="text" name="address" placeholder="Address">   
+                            <input type="text" name="address" placeholder="Address">
                         </div>
 
-                         <div style="padding:10px; ">
+                        <div style="padding:10px; ">
                             <!-- <input class="btn btn-success" type="submit" value="Confrim Order"> -->
                             <button  style="background-color:007bff;" class="btn btn-primary">Order Confrim</button>
                             <button id="close" type="btn" class="btn btn-danger">Close</button>
-                            
+
                         </div>
 
                     </div>
-                   
+
+                </form>
+
+        </div>
 
 
 
-        </div>   
-                  
 
 
 
-    
-    
 
 
 
     <script type="text/javascript">
-        
+
         $('#order').click(
 
             function()
@@ -278,11 +274,11 @@ https://templatemo.com/tm-558-klassy-cafe
     <script src="assets/js/scrollreveal.min.js"></script>
     <script src="assets/js/waypoints.min.js"></script>
     <script src="assets/js/jquery.counterup.min.js"></script>
-    <script src="assets/js/imgfix.min.js"></script> 
-    <script src="assets/js/slick.js"></script> 
-    <script src="assets/js/lightbox.js"></script> 
-    <script src="assets/js/isotope.js"></script> 
-    
+    <script src="assets/js/imgfix.min.js"></script>
+    <script src="assets/js/slick.js"></script>
+    <script src="assets/js/lightbox.js"></script>
+    <script src="assets/js/isotope.js"></script>
+
     <!-- Global Init -->
     <script src="assets/js/custom.js"></script>
     <script>
@@ -297,7 +293,7 @@ https://templatemo.com/tm-558-klassy-cafe
               $("."+selectedClass).fadeIn();
               $("#portfolio").fadeTo(50, 1);
             }, 500);
-                
+
             });
         });
 

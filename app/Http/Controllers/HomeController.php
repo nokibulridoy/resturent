@@ -8,24 +8,24 @@ use App\Models\User;
 use App\Models\Food;
 use App\Models\Foodchef;
 use App\Models\Cart;
+use App\Models\Order;
 
 
 class HomeController extends Controller
 {
-   public function index()
-   {
-    $data=food::all();
-    $data2=foodchef::all();
-    return view("home",compact("data","data2"));
+    public function index()
+    {
+        $data=food::all();
+        $data2=foodchef::all();
+        return view("home",compact("data","data2"));
+    }
 
-   }
+    public function redirects()
+    {
+        $data=food::all();
 
-   public function redirects()
-   {
-     $data=food::all();
-
-     $data2=foodchef::all();
-    $usertype=Auth::user()->usertype;
+        $data2=foodchef::all();
+        $usertype=Auth::user()->usertype;
     if($usertype=='1')
     {
         return view('admin.adminhome');
@@ -39,13 +39,12 @@ class HomeController extends Controller
 
         return view('home',compact('data','data2','count'));
     }
-   }
+    }
 
-   public function addcart(Request $request,$id)
-   
-   {
-    if(Auth::id())
+    public function addcart(Request $request,$id)
+    {
 
+        if(Auth::id())
     {
         $user_id=Auth::id();
 
@@ -73,11 +72,10 @@ class HomeController extends Controller
     }
 
 
-   }
+    }
 
-   public function showcart(Request $request,$id)
-   {
-
+    public function showcart(Request $request,$id)
+    {
     $count=cart::where('user_id',$id)->count();
 
     $data2=cart::select('*')->where('user_id', '=' , $id)->get();
@@ -86,20 +84,43 @@ class HomeController extends Controller
 
 
     return view('showcart',compact('count','data','data2'));
-   }
+    }
 
 
-   public function delete($id)
-   {
+    public function delete($id)
+    {
     $data=cart::find($id);
 
     $data->delete();
 
     return redirect()->back();
-    
-   }
 
+    }
 
+    public function orderconfirm(Request $request)
+    {
+        foreach($request->foodname as $key =>$foodname)
+
+        {
+            $data=new order;
+
+            $data->foodname=$foodname;
+
+            $data->price=$request->price[$key];
+
+            $data->quantity=$request->quantity[$key];
+
+            $data->name=$request->name;
+
+            $data->phone=$request->phone;
+
+            $data->address=$request->address;
+
+            $data->save();
+        }
+
+        return redirect()->back();
+    }
 
 }
 
