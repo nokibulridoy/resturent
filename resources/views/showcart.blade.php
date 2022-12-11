@@ -182,7 +182,7 @@ https://templatemo.com/tm-558-klassy-cafe
 
                 <tr style="position: relative; top:-35px; right:-360px;">
 
-                    <td><a href="{{url('/remove',$data2->id)}}" class="btn btn-danger">Remove</a></td>
+                    <td><a href="{{url('/delete',$data2->id)}}" class="btn btn-danger">Remove</a></td>
 
                 </tr>
 

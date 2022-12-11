@@ -98,7 +98,7 @@ class HomeController extends Controller
     }
 
     public function orderconfirm(Request $request)
-    {
+      {
         foreach($request->foodname as $key =>$foodname)
 
         {
@@ -120,8 +120,9 @@ class HomeController extends Controller
         }
 
         return redirect()->back();
-    }
+    
 
+    }
 }
 
 
