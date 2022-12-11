@@ -18,7 +18,7 @@
 
         <h1>Customer Orders</h1>
 
-      <form action="{{url('search')}}" method="get">
+      <form action="{{url('/search')}}" method="get">
 
         @csrf
         
